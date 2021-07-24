@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>House Price Predictor</title>
+    <style>
+    body {
+        background-image: url("https://image.made-in-china.com/2f0j00bpuYPzMqIGkU/Hot-Sale-New-Design-Modern-Two-Storey-Red-Cedar-Wooden-House-for-Vacation.jpg");
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+    h1{
+        text-align: center;
+        color: darksalmon;
+    }
+    div{
+        font-style: bold;
+        font-size: 15;
+        color: white;
+    }
+    table,td,tr{
+        margin : auto;
+        padding: 10px;
+        color: aliceblue;
+    }
+    p{
+        margin : auto;
+        text-align:  center;
+    }
+    #submit {
+        color: #FFFFFF;
+        background-color: #6666FF;
+        margin : auto;
+        padding: 5px;
+        font-family: Verdana;
+        font-weight: bold;
+        border-radius: 6px;
+        width: 20%;
+    }
+    .result{
+        font-style: normal;
+        font-size: 20px;
+        font-family: Verdana;
+    }
+ </style>
+</head>
+<body>
+<form action="predict" method="post">
+    <h1>Fill your House Details to get a fair price:</h1>
+    <table>
+    <tr>
+        <td>AREA TYPE</td>
+        <td>
+            <select name="area">
+                {% for i in area_type %}
+                    <option value="{{i}}">{{i}}</option>
+                {% endfor %}
+    </select></td>
+    </tr>
+    <tr>
+        <td>LOCATION</td>
+        <td>
+            <select name="location">
+                {% for i in location %}
+                    <option value="{{i}}">{{i}}</option>
+                {% endfor %}
+            </select>
+        </td>
+    </tr>
+        <tr>
+            <td>TOTAL SQFT</td>
+            <td><input type="number" name="total_sqft" placeholder="Enter the total_sqft"></td>
+        </tr>
+    <tr>
+        <td>BHK</td>
+        <td>
+            <input type="range" name="BHK" min="1" max="16"  value="10" onchange="show_value1(this.value);">
+            <div id="BHK"></div>
+        </td>
+    </tr>
+        <tr>
+        <td>BATH</td>
+        <td>
+            <input type="range" name="bath" min="1" max="16"  value="5" onchange="show_value2(this.value);">
+            <div id="bath"></div>
+        </td>
+    </tr>
+        <tr>
+        <td>BALCONY</td>
+        <td>
+            <input type="range" name="balcony" min="0" max="3"  value="3" onchange="show_value3(this.value);">
+            <div id="balcony"></div>
+        </td>
+    </tr>
+    </table>
+    <p><input type="submit" id="submit" name="GET PRICE"></p>
+        <script>
+            function show_value1(x) {
+                document.getElementById('BHK').innerHTML=x;
+                }
+            function show_value2(x) {
+                document.getElementById('bath').innerHTML=x;
+                }
+            function show_value3(x) {
+                document.getElementById('balcony').innerHTML=x;
+                }
+        </script>
+    </form>
+    <div class="result" align="center">
+    {% if result %}
+        {% for variable, value in original_input.items() %}
+            <b>{{ variable }}</b> : {{ value }}<br>
+        {% endfor %}
+        <br>
+        <br> Predicted Price of the House:
+           <p style="font-size:50px">{{ result }}</p>
+    {% endif %}
+   </div>
+</body>
+</html>
