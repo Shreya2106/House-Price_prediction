@@ -31,7 +31,9 @@ def predict():
 
     X = np.asarray(np.hstack((X,X_trans)),dtype=object)
     y = model.predict(X)[0]
-    return render_template('form.html', original_input={'Area Type':area,'Location':locat,'Total Sqft':total_sqft,'BHK':BHK,'BATH':bath,'Balcony':balcony},result = y)
+    y_ = "{:.2f}".format(y)
+    y_ = "{:,}".format(int(float(y_)*10000))
+    return render_template('form.html', original_input={'Area Type':area,'Location':locat,'Total Sqft':total_sqft,'BHK':BHK,'BATH':bath,'Balcony':balcony},result = y_)
 
 if __name__ == "__main__":
     app.run(debug=True)
