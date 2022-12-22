@@ -1,6 +1,6 @@
 # House-Price_prediction
 
-You can check the working of the app here: https://price-predictor-of-houses.herokuapp.com/
+You can check the working of the app here: https://house-price-predictor.onrender.com/
 
 The dataset used is: https://www.kaggle.com/amitabhajoy/bengaluru-house-price-data
 
